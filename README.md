@@ -1,11 +1,38 @@
-# Auto keys.lol program!
-The program automatically searches the keys.lol site for any active wallets and logs them in a file! Multiply the pages read by 128 and you get the amount of bitcoin addresses searched. If you get a large group of computers together and run this program you would eventually stumble upon a private key that you could use.
+# Auto keys.lol program
 
-# Installation
-Download the Python 3.7 installer and run it. Select custom installation and make sure the add to PATH box is checked. All the components should be installed with python. run ```pip install requests_html``` to intstall the components
+This repository provides simple scripts to scan random `keys.lol` pages for balances and log the hits. It also includes a research tool for secp256k1 key-combination analysis.
 
-# Usage
-Running the CMD_1.4-BTC.py or CMD_1.4-ETH.py program will open a cmd window that will automatically search for keys and log the page address in a file. Enjoy!
+- For an overview, see `docs/overview.md`.
+- For API details, see `docs/api.md`.
+- For usage and examples, see `docs/usage.md`.
+- For the key-combination research tool, see `docs/key-combination.md`.
 
-# VERSION 1.4 release notes
-Removed multi-threading but replaced the algorithm with a faster one
+## Installation
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+If `coincurve` requires system libraries, install `libsecp256k1` via your OS package manager.
+
+## Quick start
+
+- Bitcoin scanner:
+  ```bash
+  python3 CMD_1.4-BTC.py
+  ```
+- Ethereum scanner:
+  ```bash
+  python3 CMD_1.4-ETH.py
+  ```
+- Key-combination search (example):
+  ```bash
+  python3 tools/find_key_combination.py \
+    --key-files keys_part1.txt keys_part2.txt \
+    --targets-file targets.txt \
+    --k 3
+  ```
+
+## Version 1.4 notes
+- Removed multi-threading and optimized the algorithm for speed.
